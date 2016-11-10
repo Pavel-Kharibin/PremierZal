@@ -1,0 +1,41 @@
+{
+  "version": 2,
+  "exports": {
+    "PremierZal.Service/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/PremierZal.Service.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/PremierZal.Service.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/PremierZal.Service.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    },
+    "PremierZal.Data/1.0.0": {
+      "type": "project",
+      "framework": ".NETFramework,Version=v4.5.2",
+      "compile": {
+        "bin/Debug/PremierZal.Data.dll": {}
+      },
+      "runtime": {
+        "../../packages/EntityFramework.6.1.3/lib/net45/EntityFramework.SqlServer.dll": {},
+        "../../packages/EntityFramework.6.1.3/lib/net45/EntityFramework.dll": {},
+        "bin/Debug/PremierZal.Data.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/PremierZal.Data.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}
