@@ -113,7 +113,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\PremierZal.Common\PremierZal.Common.csproj">
+    <ProjectReference Include="..\PremierZal.Common\PremierZal.Common.csproj">
       <Project>{e1351210-0d3c-4910-9ed1-cb3faad6129e}</Project>
       <Name>PremierZal.Common</Name>
     </ProjectReference>

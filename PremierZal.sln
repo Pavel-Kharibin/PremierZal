@@ -18,7 +18,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremierZal.Service", "src\P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremierZal.Common", "src\PremierZal.Common\PremierZal.Common.csproj", "{E1351210-0D3C-4910-9ED1-CB3FAAD6129E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremierZal.App", "PremierZal.App\PremierZal.App.csproj", "{02185FDC-2E6C-4C00-89F6-79EC0324AB01}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PremierZal.App", "src\PremierZal.App\PremierZal.App.csproj", "{02185FDC-2E6C-4C00-89F6-79EC0324AB01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
