@@ -14,7 +14,7 @@ namespace PremierZal.App
     public partial class MainWindow
     {
         private readonly MakeOrderViewModel _makeOrderViewModel = new MakeOrderViewModel(Enumerable.Empty<Session>());
-        private readonly Timer _timer = new Timer(Config.SessionsRefreshInterval);
+        private readonly Timer _timer = new Timer(Config.DataRefreshInterval);
 
         public MainWindow()
         {
@@ -96,13 +96,15 @@ namespace PremierZal.App
                 var order = new Order
                 {
                     SessionId = _makeOrderViewModel.SelectedSession.Id,
-                    TicketsCount = _makeOrderViewModel.TicketsCount,
+                    TicketsCount = _makeOrderViewModel.TicketsCount == 0 ? 1 : _makeOrderViewModel.TicketsCount,
                     Sold = DateTime.Now
                 };
 
                 var progress = new ProgressWindow("Оформление заказа...") {Owner = this};
                 progress.Show();
+                BtnAddOrder.IsEnabled = false;
                 await ApiClient.AddOrderAsync(order);
+                BtnAddOrder.IsEnabled = true;
                 progress.Close();
 
                 order.Session = _makeOrderViewModel.SelectedSession;

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Добавление заказа" Height="180" Width="470" ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" Closing="Window_Closing">
     <Grid>
         <GroupBox HorizontalAlignment="Stretch" Margin="10,10,10,35" VerticalAlignment="Stretch"
                   Header="Параметры заказа">
@@ -17,7 +17,9 @@
                 <Label Content="Выберите кол-во билетов" HorizontalAlignment="Left" Margin="10,10,0,10"
                        VerticalAlignment="Bottom" />
                 <TextBox x:Name="TxtTicketsCount" VerticalAlignment="Bottom" Margin="170,0,0,10"
-                         HorizontalAlignment="Left" Width="40" Text="{Binding TicketsCount}" />
+                         HorizontalAlignment="Left" Width="40" Text="{Binding TicketsCount}" MaxLength="3"
+                         PreviewTextInput="TxtTicketsCount_PreviewTextInput"
+                         DataObject.Pasting="TxtTicketsCount_OnPasting" />
             </Grid>
         </GroupBox>
         <Button x:Name="BtnAddOrder" Content="Оформить заказ" HorizontalAlignment="Right" Margin="0,0,10,10"

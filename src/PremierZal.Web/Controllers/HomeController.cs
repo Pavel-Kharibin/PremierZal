@@ -16,7 +16,7 @@ namespace PremierZal.Web.Controllers
         {
             var sessions = await Service.SessionsGetAllAsync();
 
-            return View();
+            return View(sessions);
         }
     }
 }

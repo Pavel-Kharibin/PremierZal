@@ -18,7 +18,7 @@
                     <DataGridTextColumn Header="Кол-во билетов" Binding="{Binding TicketsCount}" CanUserReorder="False"
                                         IsReadOnly="True" />
                     <DataGridTextColumn Header="Дата продажи"
-                                        Binding="{Binding Sold, StringFormat='dd.MM.yyyy hh:mm:ss'}"
+                                        Binding="{Binding Sold, StringFormat='dd.MM.yyyy HH:mm:ss'}"
                                         CanUserReorder="False" IsReadOnly="True" Width="Auto" />
                 </DataGrid.Columns>
             </DataGrid>

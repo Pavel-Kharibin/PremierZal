@@ -1,0 +1,27 @@
+﻿@using PremierZal.Common.Models;
+
+@model Session
+
+<tr data-id="@Model.Id">
+    <td><span data-name="id" data-ignore="1">@Model.Id</span></td>
+    <td><span data-name="name" data-required="1">@Model.Name</span></td>
+    <td><span data-name="begins" data-required="1" data-readonly="1">@Model.Begins.ToString("dd.MM.yyyy HH:mm:ss")</span></td>
+    <td>
+        <div class="btn-toolbar">
+            <div class="btn-group btn-group-sm">
+                <button title="Редактировать" class="btn btn-sm btn-default btn-edit" type="button">
+                    <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+                <button title="Сохранить" class="btn btn-sm btn-default btn-save" style="display: none;" type="button">
+                    <span class="glyphicon glyphicon-save"></span>
+                </button>
+                <button title="Отменить редактирование" class="btn btn-sm btn-default btn-cancel" style="display: none;" type="button">
+                    <span class="glyphicon glyphicon-ban-circle"></span>
+                </button>
+                <button title="Удалить" class="btn btn-sm btn-default btn-delete" type="button">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </button>
+            </div>
+        </div>
+    </td>
+</tr>
