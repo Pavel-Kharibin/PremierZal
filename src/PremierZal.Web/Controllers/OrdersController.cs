@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PremierZal.Data.Models;
+using PremierZal.Common.Models;
 using PremierZal.Service.Interfaces;
 using ControllerBase = PremierZal.Web.Common.Bases.ControllerBase;
 
@@ -14,25 +14,20 @@ namespace PremierZal.Web.Controllers
         {
         }
 
-        public async Task<IEnumerable<Session>> Get()
+        public async Task<IEnumerable<Order>> Get()
         {
-            var sessions = await Service.SessionsGetAllAsync();
+            var orders = await Service.OrdersGetAllWithSessionAsync();
 
-            return sessions;
+            return orders;
         }
 
-        [HttpPut]
-        public async Task Save(Session session)
-        {
-            await Service.SessionSaveAsync(session);
-        }
 
         [HttpPost]
-        public async Task<Session> Add(Session session)
+        public async Task<Order> Add([FromBody] Order order)
         {
-            await Service.SessionAddAsync(session);
+            await Service.OrderAddAsync(order);
 
-            return session;
+            return order;
         }
     }
 }

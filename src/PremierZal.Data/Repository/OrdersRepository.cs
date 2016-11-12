@@ -1,6 +1,10 @@
-﻿using PremierZal.Data.Bases;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Threading.Tasks;
+using PremierZal.Common.Models;
+using PremierZal.Data.Bases;
 using PremierZal.Data.Interfaces;
-using PremierZal.Data.Models;
 
 namespace PremierZal.Data.Repository
 {
@@ -8,6 +12,13 @@ namespace PremierZal.Data.Repository
     {
         public OrdersRepository(PremierZalDbContext dbContext) : base(dbContext)
         {
+        }
+
+        public async Task<IEnumerable<Order>> GetAllWithSessionAsync()
+        {
+            var orders = await DbSet.OrderByDescending(o => o.Sold).Include(o => o.Session).ToListAsync();
+
+            return orders;
         }
     }
 }

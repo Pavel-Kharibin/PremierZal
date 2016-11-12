@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Threading.Tasks;
 
 namespace PremierZal.Data.Bases
@@ -11,6 +12,18 @@ namespace PremierZal.Data.Bases
             DbSet = DbContext.Set<T>();
         }
 
+        public async Task<T> AddAsync(T model)
+        {
+            DbSet.Add(model);
+            await DbContext.SaveChangesAsync();
+
+            return model;
+        }
+
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await DbSet.ToListAsync();
+        }
         public async Task SaveAsync(T model)
         {
             DbSet.Attach(model);

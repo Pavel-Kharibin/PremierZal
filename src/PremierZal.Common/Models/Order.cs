@@ -8,5 +8,7 @@ namespace PremierZal.Common.Models
         public int SessionId { get; set; }
         public int TicketsCount { get; set; }
         public DateTime Sold { get; set; }
+
+        public Session Session { get; set; }
     }
 }

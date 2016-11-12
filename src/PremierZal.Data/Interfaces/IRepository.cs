@@ -1,9 +1,12 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PremierZal.Data.Interfaces
 {
-    public interface IRepository<in T> where T : class
+    public interface IRepository<T> where T : class
     {
+        Task<T> AddAsync(T model);
         Task SaveAsync(T model);
+        Task<IEnumerable<T>> GetAllAsync();
     }
 }

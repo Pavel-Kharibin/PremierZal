@@ -1,5 +1,5 @@
 ﻿using System.Data.Entity.ModelConfiguration;
-using PremierZal.Data.Models;
+using PremierZal.Common.Models;
 
 namespace PremierZal.Data.Configuration
 {

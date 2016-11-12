@@ -1,11 +1,28 @@
-﻿    <Window x:Class="PremierZal.App.AddOrderWindow"
+﻿<Window x:Class="PremierZal.App.AddOrderWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-            mc:Ignorable="d"
-        Title="Добавление заказа" Height="300" Width="474.227" ShowInTaskbar="False" WindowStartupLocation="CenterOwner" ResizeMode="NoResize">
+        mc:Ignorable="d"
+        Title="Добавление заказа" Height="180" Width="470" ShowInTaskbar="False" WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
     <Grid>
-        
+        <GroupBox HorizontalAlignment="Stretch" Margin="10,10,10,35" VerticalAlignment="Stretch"
+                  Header="Параметры заказа">
+            <Grid>
+                <Label Content="Выберите сеанс" HorizontalAlignment="Left" Margin="10,10,10,10" VerticalAlignment="Top" />
+                <ComboBox x:Name="CmbSessions" HorizontalAlignment="Stretch" Margin="110,13,10,0"
+                          VerticalAlignment="Top" ItemsSource="{Binding Sessions}"
+                          SelectedItem="{Binding SelectedSession}" DisplayMemberPath="Name" SelectedValuePath="Id" />
+                <Label Content="Выберите кол-во билетов" HorizontalAlignment="Left" Margin="10,10,0,10"
+                       VerticalAlignment="Bottom" />
+                <TextBox x:Name="TxtTicketsCount" VerticalAlignment="Bottom" Margin="170,0,0,10"
+                         HorizontalAlignment="Left" Width="40" Text="{Binding TicketsCount}" />
+            </Grid>
+        </GroupBox>
+        <Button x:Name="BtnAddOrder" Content="Оформить заказ" HorizontalAlignment="Right" Margin="0,0,10,10"
+                VerticalAlignment="Bottom" Width="135" IsDefault="True" Click="BtnAddOrder_Click" />
+        <Button x:Name="BtnCancel" Content="Отмена" HorizontalAlignment="Right" Margin="0,0,150,10"
+                VerticalAlignment="Bottom" Width="135" IsCancel="True" />
     </Grid>
 </Window>

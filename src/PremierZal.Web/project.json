@@ -21,6 +21,9 @@
   "frameworks": {
     "net452": {
       "dependencies": {
+        "PremierZal.Common": {
+          "target": "project"
+        },
         "PremierZal.Service": {
           "target": "project"
         }

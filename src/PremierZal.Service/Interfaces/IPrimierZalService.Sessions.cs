@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using PremierZal.Data.Models;
+using PremierZal.Common.Models;
 
 namespace PremierZal.Service.Interfaces
 {

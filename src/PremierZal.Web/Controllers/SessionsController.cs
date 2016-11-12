@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PremierZal.Data.Models;
+using PremierZal.Common.Models;
 using PremierZal.Service.Interfaces;
 using ControllerBase = PremierZal.Web.Common.Bases.ControllerBase;
 

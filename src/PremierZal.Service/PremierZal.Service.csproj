@@ -49,6 +49,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PremierZal.Common\PremierZal.Common.csproj">
+      <Project>{E1351210-0D3C-4910-9ED1-CB3FAAD6129E}</Project>
+      <Name>PremierZal.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PremierZal.Data\PremierZal.Data.csproj">
       <Project>{c2595c1f-0bc9-4b4a-a4a4-38f60d78734d}</Project>
       <Name>PremierZal.Data</Name>
