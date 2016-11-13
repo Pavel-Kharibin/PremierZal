@@ -7,7 +7,7 @@ using ControllerBase = PremierZal.Web.Common.Bases.ControllerBase;
 
 namespace PremierZal.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/{id?}")]
     public class SessionsController : ControllerBase
     {
         public SessionsController(IPrimierZalService servive) : base(servive)
@@ -22,9 +22,9 @@ namespace PremierZal.Web.Controllers
         }
 
         [HttpPut]
-        public async Task Save(Session session)
+        public async Task<Session> Save(Session session)
         {
-            await Service.SessionSaveAsync(session);
+            return await Service.SessionSaveAsync(session);
         }
 
         [HttpPost]
@@ -33,6 +33,12 @@ namespace PremierZal.Web.Controllers
             await Service.SessionAddAsync(session);
 
             return session;
+        }
+
+        [HttpDelete]
+        public async Task Delete(int id)
+        {
+            await Service.SessionDeleteAsync(id);
         }
     }
 }

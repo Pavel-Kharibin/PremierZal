@@ -40,7 +40,7 @@ namespace PremierZal.App
 
         private bool CheckText(string text)
         {
-            var regex = new Regex("[0-9.-]+");
+            var regex = new Regex("^[0-9.-]+");
             return regex.IsMatch(text) && Convert.ToInt32(TxtTicketsCount.Text + text) > 0;
         }
 

@@ -16,9 +16,14 @@ namespace PremierZal.Service
             return await _sessionsRepositoty.AddAsync(session);
         }
 
-        public async Task SessionSaveAsync(Session session)
+        public async Task<Session> SessionSaveAsync(Session session)
         {
-            await _sessionsRepositoty.SaveAsync(session);
+            return await _sessionsRepositoty.SaveAsync(session);
+        }
+
+        public async Task SessionDeleteAsync(int id)
+        {
+            await _sessionsRepositoty.DeleteAsync(id);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PremierZal.Data.Bases
 {
-    public abstract class RepositoryBase<T> where T : class 
+    public abstract class RepositoryBase<T> where T : class
     {
         protected RepositoryBase(PremierZalDbContext dbContext)
         {
@@ -24,11 +24,13 @@ namespace PremierZal.Data.Bases
         {
             return await DbSet.ToListAsync();
         }
-        public async Task SaveAsync(T model)
+        public async Task<T> SaveAsync(T model)
         {
             DbSet.Attach(model);
             DbContext.Entry(model).State = EntityState.Modified;
             await DbContext.SaveChangesAsync();
+
+            return model;
         }
 
         protected DbSet<T> DbSet { get; }

@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using PremierZal.Common.Models;
 using PremierZal.Service.Interfaces;
 using ControllerBase = PremierZal.Web.Common.Bases.ControllerBase;
 
@@ -17,6 +19,11 @@ namespace PremierZal.Web.Controllers
             var sessions = await Service.SessionsGetAllAsync();
 
             return View(sessions);
+        }
+
+        public IActionResult NewRow()
+        {
+            return PartialView("_Row", new Session {Begins = DateTime.Now});
         }
     }
 }

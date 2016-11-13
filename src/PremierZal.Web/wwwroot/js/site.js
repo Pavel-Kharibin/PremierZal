@@ -37,22 +37,26 @@
             onCloseEditor: function() {}
         };
         const options = $.extend(true, {}, defaults, params);
-        
-        this.find("tr[data-id]").each(function() {
-            const $row = $(this);
+        const $this = this;
 
-            $(this).on("click", ".btn-edit", function() {
-                showEditor($row);
-            });
-            $(this).on("click", ".btn-save", function() {
-                saveRow($row);
-            });
-            $(this).on("click", ".btn-cancel", function() {
-                hideEditor($row);
-            });
-            $(this).on("click", ".btn-delete", function() {
-                deleteRow($row);
-            });
+        $this.on("click", ".btn-edit", function() {
+            const $row = $(this).closest("tr[data-id]");
+            showEditor($row);
+        });
+        $this.on("click", ".btn-save", function() {
+            const $row = $(this).closest("tr[data-id]");
+            saveRow($row);
+        });
+        $this.on("click", ".btn-cancel", function() {
+            const $row = $(this).closest("tr[data-id]");
+            hideEditor($row);
+        });
+        $this.on("click", ".btn-delete", function() {
+            const $row = $(this).closest("tr[data-id]");
+            deleteRow($row);
+        });
+        $this.find(".btn-add").on("click", function() {
+            addNewRow($(this));
         });
 
         function showEditor($row) {
@@ -68,6 +72,7 @@
                 $input.attr("name", $(this).attr("data-name")).val($(this).text());
 
                 if ($(this).attr("data-required")) $input.attr("required", "required");
+                if ($(this).attr("data-placeholder")) $input.attr("placeholder", $(this).attr("data-placeholder"));
                 if ($(this).attr("data-readonly")) $input.attr("readonly", "readonly");
 
                 $td.append($input);
@@ -77,6 +82,11 @@
         }
 
         function hideEditor($row) {
+            if (getId($row) === 0) {
+                $row.remove();
+                return;
+            }
+
             $row.find(".btn-edit, .btn-delete").show();
             $row.find(".btn-save, .btn-cancel").hide();
 
@@ -87,7 +97,6 @@
             });
 
             $row.find("td").removeClass("has-error");
-
 
             options.onCloseEditor($row);
         }
@@ -103,15 +112,18 @@
             disableRow($row);
             $.ajax({
                 url: options.apiUrl,
-                type: "PUT",
+                type: item.id === 0 ? "POST" : "PUT",
                 dataType: "json",
                 data: item,
-                success: function (data, textStatus, jqXhr) {
+                success: function(data, textStatus, jqXhr) {
+                    item.id = item.id === 0 ? data.id : item.id;
+                    
                     updateRow($row, item);
-                    hideEditor();
+                    hideEditor($row);
+                    
                     options.save.after();
                 },
-                error: function (jqXhr, textStatus, error) {
+                error: function(jqXhr, textStatus, error) {
                     alert(error);
                 },
                 complete: function() {
@@ -121,25 +133,20 @@
         }
 
         function deleteRow($row) {
-            const id = getId($row);
-
-            if (id === 0) {
-                $row.remove();
-                return;
-            }
-
             if (options.delete.confirm && !confirm(options.delete.confirm) || !options.delete.before($row)) return;
+            
+            disableRow($row);
 
             $.ajax({
-                url: `${options.apiUrl}${id}`,
+                url: `${options.apiUrl}${getId($row)}`,
                 type: "DELETE",
-                dataType: "json",
                 success: function(data, textStatus, jqXhr) {
                     $row.remove();
                     options.delete.after();
                 },
                 error: function(jqXhr, textStatus, error) {
                     alert(error);
+                    disableRow($row, false);
                 }
             });
         }
@@ -156,12 +163,30 @@
         }
 
         function updateRow($row, item) {
-            console.log(item);
+            $row.attr("data-id", item.id);
             for (let key in item) {
                 if (item.hasOwnProperty(key)) {
                     $row.find(`span[data-name='${key}']`).text(item[key]);
                 }
             }
+        }
+
+        function addNewRow($btn) {
+            $btn.button("loading");
+            $.ajax({
+                url: "/home/newrow",
+                dataType: "html",
+                success: function(data, textStatus, jqXhr) {
+                    $this.find("tbody").append(data);
+                    showEditor($this.find("tr[data-id='0']").last());
+                },
+                error: function(jqXhr, textStatus, error) {
+                    alert(error);
+                },
+                complete: function() {
+                    $btn.button("reset");
+                }
+            });
         }
 
         return this;

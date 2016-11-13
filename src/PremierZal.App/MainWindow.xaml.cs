@@ -59,6 +59,15 @@ namespace PremierZal.App
                 }
                 _makeOrderViewModel.Sessions.Remove(session);
             }
+
+            // Update sessions
+            foreach (var session in _makeOrderViewModel.Sessions)
+            {
+                var newSession = sessions.First(s => s.Id == session.Id);
+
+                session.Name = newSession.Name;
+                session.Begins = newSession.Begins;
+            }
         }
 
         private async Task UpdateOrders()
@@ -69,9 +78,25 @@ namespace PremierZal.App
                 Model.Orders = new ObservableCollection<Order>(orders);
             else
             {
+                // Add new orders
                 foreach (var order in orders.Where(ord => Model.Orders.All(o => o.Id != ord.Id)))
                 {
                     Model.Orders.Insert(0, order);
+                }
+
+                // Remove deleted orders
+                var toRemove = Model.Orders.Where(ord => orders.All(o => o.Id != ord.Id)).ToList();
+                foreach (var order in toRemove)
+                {
+                    Model.Orders.Remove(order);
+                }
+
+                // Update sessions names
+                foreach (var order in Model.Orders)
+                {
+                    var newOrder = orders.FirstOrDefault(o => o.Id == order.Id);
+                    order.Session.Name = newOrder.Session.Name;
+                    order.Session.Begins = newOrder.Session.Begins;
                 }
             }
         }

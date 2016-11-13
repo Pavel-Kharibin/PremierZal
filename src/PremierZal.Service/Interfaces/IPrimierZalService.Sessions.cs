@@ -8,6 +8,7 @@ namespace PremierZal.Service.Interfaces
     {
         Task<IEnumerable<Session>> SessionsGetAllAsync();
         Task<Session> SessionAddAsync(Session session);
-        Task SessionSaveAsync(Session session);
+        Task<Session> SessionSaveAsync(Session session);
+        Task SessionDeleteAsync(int id);
     }
 }

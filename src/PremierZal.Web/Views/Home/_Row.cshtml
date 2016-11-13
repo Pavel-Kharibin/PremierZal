@@ -3,8 +3,8 @@
 @model Session
 
 <tr data-id="@Model.Id">
-    <td><span data-name="id" data-ignore="1">@Model.Id</span></td>
-    <td><span data-name="name" data-required="1">@Model.Name</span></td>
+    <td><span data-name="id" data-ignore="1">@(Model.Id != 0 ? Model.Id.ToString() : "")</span></td>
+    <td><span data-name="name" data-required="1" data-placeholder="Введите название сеанса">@Model.Name</span></td>
     <td><span data-name="begins" data-required="1" data-readonly="1">@Model.Begins.ToString("dd.MM.yyyy HH:mm:ss")</span></td>
     <td>
         <div class="btn-toolbar">
